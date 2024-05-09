@@ -5,10 +5,17 @@ import { useState } from "react";
 import Spinner from "./components/Spinner";
 
 export default function Home() {
+  //------------------------------------------------------------------
+  //                          useState
+  //------------------------------------------------------------------
   const [message, setMessage] = useState("");
+  const [quote, setQuote] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingError, setLoadingError] = useState(false);
 
+  //------------------------------------------------------------------
+  //                         handleSubmit
+  //------------------------------------------------------------------
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     console.log("Form Data Submitted:", message);
@@ -19,6 +26,9 @@ export default function Home() {
     setMessage(e.target.value);
   }
 
+  //------------------------------------------------------------------
+  //                         JSX element
+  //------------------------------------------------------------------
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {loading ? (
