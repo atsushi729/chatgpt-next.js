@@ -50,34 +50,37 @@ export default function Home() {
               className="rounded-lg"
             />
           </div>
-          <div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  rows={4}
-                  value={message}
-                  onChange={handleChange}
-                  className="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  className="items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Message
+              </label>
+              <textarea
+                name="message"
+                id="message"
+                rows={4}
+                value={message}
+                onChange={handleChange}
+                className="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
+          {loadingError && (
+            <div className="flex justify-center mt-5">
+              Error loading data!!! Please try again!!!
+            </div>
+          )}
         </div>
       )}
     </main>
