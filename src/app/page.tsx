@@ -27,10 +27,14 @@ export default function Home() {
     setLoadingError(false);
 
     try {
-      const response = await fetch(
-        "/api/motivation?prompt=" + encodeURIComponent(prompt),
-        { method: "POST" }
-      );
+      const response = await fetch("/api/motivation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -108,6 +112,11 @@ export default function Home() {
             {loadingError && (
               <div className="flex justify-center mt-5">
                 Error loading data!!! Please try again!!!
+              </div>
+            )}
+            {quote && (
+              <div className="flex justify-center mt-5">
+                <p className="text-center text-xl">{quote}</p>
               </div>
             )}
           </div>
