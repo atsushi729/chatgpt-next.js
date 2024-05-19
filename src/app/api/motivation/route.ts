@@ -8,8 +8,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-console.log(openai);
-
 //---------------------------------------------------------------------
 //                             API request
 //---------------------------------------------------------------------
@@ -24,12 +22,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const body = await request.json();
   const prompt = body.prompt;
 
+  // Check if prompt is missing
   if (!prompt) {
     return new NextResponse(JSON.stringify({ error: "Prompt is required" }), {
       status: 400,
     });
   }
 
+  // Check if prompt is too long
   if (prompt.length > 100) {
     return new NextResponse(JSON.stringify({ error: "Prompt is too long" }), {
       status: 400,
@@ -65,7 +65,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }
 
       const quote = completion.choices[0].message.content.trim();
-      return new NextResponse(JSON.stringify({ quote }), { status: 200 });
+      const formattedQuote = quote.replace(/\n/g, " "); // Remove line breaks from the quote
+      return new NextResponse(JSON.stringify({ quote: formattedQuote }), {
+        status: 200,
+      });
     } catch (error: any) {
       if (
         error.response &&
